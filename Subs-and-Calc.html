@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM</title>
+    <style>
+
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+
+      .subscribe-button {
+        background-color: #ff0000;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+
+        cursor: pointer;
+
+      }
+      .subscribe-button:hover {
+      background-color: #cc0000;
+      color:white ;
+
+      }
+
+      .is-subscribed {
+        background-color: rgb(240, 240, 240) ;
+        color: rgb(11, 9, 9);
+      }
+      .is-subscribed:hover{
+        background-color: #ececec;
+      color:rgb(234, 10, 10) ;
+      }
+      .cost-input {
+        font: 15px Arial;
+        /* padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px; */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 7px;
+        width: 200px;
+        margin-bottom: 10px;
+
+        
+      }
+      .js-calculate {
+        background-color: green;
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .js-calculate:hover {
+        background-color: rgb(15, 104, 15);
+      }
+
+      .error-message {
+        color: rgb(255, 0, 51);
+      }
+      
+
+
+    </style>
+  </head>
+  <body>
+    <p>
+      Youtube Subscribe Button:
+    </p>
+    <button onclick="
+      Subscribe();
+    "  class="js-subscribe-button subscribe-button"> Subscribe</button>
+
+    <p>Amazon Shipping Calculator :</p>
+
+    <p> Order under or $40 = +$10 Shipping.</p>
+    <p>Order over $40 = FREE Shipping</p>
+    <p> Please enter the cost ;</p>
+
+    <input placeholder="Cost of order" class="js-cost-input cost-input" onkeydown="
+     handleCostKeydown (event);
+    " >
+    <button onclick="
+      CalculateTotal();
+    
+    " class="js-calculate">Calculate</button>
+    <p class="js-total-cost"></p>
+    <p class="js-error-message error-message"></p>
+
+
+    <script>
+
+      // String(45);
+      // console.log('45' + 5);
+      // console.log('55' - 5);
+      // console.log(5 + 5);
+      // always use Number() to convert a string to a number
+
+      function handleCostKeydown(event) {
+         // console.log(event.key);
+         if (event.key === 'Enter') {
+         CalculateTotal();
+         }
+      }
+
+      function CalculateTotal() {
+       const inputElement = document.querySelector('.js-cost-input');
+       let Cost = Number(inputElement.value);
+
+       document.querySelector('.js-total-cost').innerHTML = '';
+       document.querySelector('.js-error-message').innerHTML = '';
+
+       if (Cost <= 0) {
+        document.querySelector('.js-error-message').innerHTML = 'ERROR: Cost should be greater than $0';
+
+       return;
+       }
+
+
+       
+       if (Cost <= 40 ) { 
+        Cost = Cost + 10 ;
+       
+       
+       } else {
+        Cost = Cost + 0 ;
+       }
+         
+       document.querySelector('.js-total-cost').innerHTML = `Total Cost: $${Cost}`;
+
+      }
+
+      function Subscribe() {
+        const buttonElement=  document.   querySelector('.js-subscribe-button');
+          if (buttonElement.innerText === 'Subscribe' ) {
+            buttonElement.innerHTML = 'Subscribed';
+            buttonElement.classList.add('is-subscribed');
+          } else {
+            buttonElement.innerHTML = 'Subscribe';
+            buttonElement.classList.remove('is-subscribed');
+          }
+      }
+      
+    </script>
+  </body>
+
+</html>
